@@ -46,6 +46,26 @@
     [self RCBlurredImageView_commonInit];
 }
 
+- (void)setImage:(UIImage *)image createBlur:(BOOL)createBlur
+{
+    _image = image;
+    _imageView.image = _image;
+    if (createBlur)
+        [self createBlur];
+    else
+        _blurredImageView.image = nil;
+}
+
+- (BOOL)blurCreated
+{
+    return (_blurredImageView.image != nil);
+}
+
+- (void)createBlur
+{
+    _blurredImageView.image = [self blurredImage];
+}
+
 - (void)RCBlurredImageView_commonInit
 {
     // Set up regular image
