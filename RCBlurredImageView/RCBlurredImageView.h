@@ -26,8 +26,8 @@
 
 - (instancetype)initWithImage:(UIImage *)image;
 
-@property (nonatomic, strong) UIImage   *image;           // default is nil
-@property (nonatomic, assign) CGFloat   blurIntensity;    // default is 0.f
+@property (nonatomic, strong) UIImage *image;           // default is nil
+@property (nonatomic, assign) CGFloat blurIntensity;    // default is 0.f
 
 - (void)setImage:(UIImage *)image createBlur:(BOOL)createBlur;
 - (BOOL)blurCreated;

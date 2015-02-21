@@ -44,16 +44,20 @@
 {
     _image = image;
     [self RCBlurredImageView_commonInit];
+    _imageView.image = _image;
+    _blurredImageView.image = [self blurredImage];
 }
 
 - (void)setImage:(UIImage *)image createBlur:(BOOL)createBlur
 {
     _image = image;
+    [self RCBlurredImageView_commonInit];
     _imageView.image = _image;
-    if (createBlur)
-        [self createBlur];
-    else
+    if (createBlur) {
+        _blurredImageView.image = [self blurredImage];
+    } else {
         _blurredImageView.image = nil;
+    }
 }
 
 - (BOOL)blurCreated
@@ -70,25 +74,21 @@
 {
     // Set up regular image
     if (_imageView == nil) {
-        _imageView = [[UIImageView alloc] initWithImage:_image];
+        _imageView = [[UIImageView alloc] initWithImage:nil];
         _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _imageView.translatesAutoresizingMaskIntoConstraints = YES;
         _imageView.frame = self.bounds;
         [self addSubview:_imageView];
-    } else {
-        _imageView.image = _image;
     }
     
     // Set blurred image
     if (_blurredImageView == nil) {
-        _blurredImageView = [[UIImageView alloc] initWithImage:[self blurredImage]];
+        _blurredImageView = [[UIImageView alloc] initWithImage:nil];
         _blurredImageView.alpha = 0.f;
         _blurredImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _blurredImageView.translatesAutoresizingMaskIntoConstraints = YES;
         _blurredImageView.frame = self.bounds;
         [self addSubview:_blurredImageView];
-    } else {
-        _blurredImageView.image = [self blurredImage];
     }
     
     //NSLog(@"imageview frame = %@", NSStringFromCGRect(_imageView.frame));
